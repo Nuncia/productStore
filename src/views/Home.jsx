@@ -31,6 +31,25 @@ const Productos = () => {
          }}
       >
          <h2 className="text-center">Departamento hombre</h2>
+         <div
+            id="carouselExampleSlidesOnly"
+            className="carousel slide"
+            data-ride="carousel"
+         >
+            <div className="carousel-inner">
+               {productos.map((item) => (
+                  <div key={item.id}>
+                     <div className="carousel-item ">
+                        <img
+                           className="d-block w-10"
+                           src={item.image}
+                           alt="First slide"
+                        />
+                     </div>
+                  </div>
+               ))}
+            </div>
+         </div>
          <div className="cards">
             {cargando ? (
                <p>Cargando...</p>

@@ -1,7 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
-import ExampleCarouselImage from 'components/ExampleCarouselImage';
+// import ExampleCarouselImage from 'components/ExampleCarouselImage';
 
-function UncontrolledExample() {
+function Carrusel() {
    return (
       <Carousel>
          <Carousel.Item>
@@ -32,4 +32,4 @@ function UncontrolledExample() {
    );
 }
 
-export default UncontrolledExample;
+export default Carrusel;
