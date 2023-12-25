@@ -9,6 +9,7 @@ const Producto = () => {
 
    useEffect(() => {
       obtenerProducto(id);
+      console.log('obtenerProducto');
       setcargando(false);
    }, [id]);
    return (
@@ -20,28 +21,44 @@ const Producto = () => {
          ) : (
             <div key={producto.id}>
                <div
+                  className="imagen__producto"
                   style={{
                      display: 'flex',
                      flexDirection: 'column',
                      justifyContent: 'center',
                   }}
                >
-                  <p className="text-center italic hover:not-italic">
+                  <h2 className="text-center italic hover:not-italic">
                      {producto.title}
-                  </p>
-                  <div>
+                  </h2>
+                  <div
+                     style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        paddingTop: '50px',
+                     }}
+                  >
                      <img
                         className="h-96 w-72"
                         src={producto.image}
                         alt={producto.title}
-                        style={{
-                           justifyContent: 'center',
-                        }}
                      />
                   </div>
                </div>
-               <div>
-                  <p>{producto.description}</p>
+               <div className="descripcion">
+                  <p style={{ fontSize: 'larger', textAlign: 'center' }}>
+                     {producto.description}
+                  </p>
+                  <div
+                     style={{ display: 'flex', justifyContent: 'space-around' }}
+                  >
+                     <button className="btn btn-primary text-center">
+                        Agregar
+                     </button>
+                     <p>
+                        <strong>${producto.price}</strong>
+                     </p>
+                  </div>
                </div>
             </div>
          )}

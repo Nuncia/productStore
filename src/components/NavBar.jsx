@@ -6,12 +6,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 const NavBar = () => {
    return (
       <div
-         className="d-flex justify-between, items-center"
-         style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-         }}
+         className="d-flex justify-between, items-center, flex-col"
+         // style={{
+         //    display: 'flex',
+         //    justifyContent: 'space-between',
+         //    alignItems: 'center',
+         // }}
       >
          <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
@@ -37,20 +37,20 @@ const NavBar = () => {
                         </NavDropdown.Item>
                      </NavDropdown>
                   </Nav>
+                  <div
+                     style={{
+                        backgroundColor: 'grey',
+                        width: '50px',
+                        height: '50px',
+                        borderRadius: '50%',
+                        position: 'relative',
+                        zIndex: -3,
+                     }}
+                  >
+                     <i className="fa-solid fa-cart-shopping fa-2x pt-2 ps-1"></i>
+                  </div>
                </Navbar.Collapse>
             </Container>
-            <div
-               style={{
-                  backgroundColor: 'grey',
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '50%',
-                  position: 'relative',
-                  zIndex: -3,
-               }}
-            >
-               <i className="fa-solid fa-cart-shopping fa-2x pt-2 ps-1"></i>
-            </div>
          </Navbar>
       </div>
    );
