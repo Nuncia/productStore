@@ -10,7 +10,10 @@ const Home = () => {
 
    const filterProductos = (search) => {
       console.log(search);
-      const filtrados = productos.filter((prod) => prod.title.includes(search));
+      const filtrados = productos.filter((prod) =>
+         // console.log(prod.title)
+         prod.title.toLowerCase().includes(search.toLowerCase())
+      );
       setProductosFiltrados(filtrados);
    };
 

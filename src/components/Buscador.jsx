@@ -6,7 +6,7 @@ const Buscador = ({ onSearch }) => {
    const handleSearch = (e) => {
       e.preventDefault();
       console.log(buscandoProducto);
-      onSearch();
+      onSearch(buscandoProducto);
    };
    return (
       <div>
