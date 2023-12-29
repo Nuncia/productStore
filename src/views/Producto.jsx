@@ -17,7 +17,7 @@ const Producto = () => {
          {cargando ? (
             <p>Cargando...</p>
          ) : producto === undefined ? (
-            <p>Se ha producido un error en la carga</p>
+            <p>Se produjo un error en la carga</p>
          ) : (
             <div key={producto.id}>
                <div
@@ -28,7 +28,7 @@ const Producto = () => {
                      justifyContent: 'center',
                   }}
                >
-                  <h2 className="text-center italic hover:not-italic">
+                  <h2 className="text-center italic hover:not-italic font-black">
                      {producto.title}
                   </h2>
                   <div
@@ -39,7 +39,8 @@ const Producto = () => {
                      }}
                   >
                      <img
-                        className="h-96 w-72"
+                        style={{ width: '300px' }}
+                        // className="h-96 w-72"
                         src={producto.image}
                         alt={producto.title}
                      />

@@ -9,7 +9,7 @@ function App() {
       <>
          <ProviderStore>
             <BrowserRouter>
-               <NavBar />
+               {/* <NavBar /> */}
                <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/producto/:id" element={<Producto />} />

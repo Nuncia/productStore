@@ -1,25 +1,24 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { ContextStore } from '../context/ContextStore';
+import Buscador from '../components/Buscador';
+import Productos from '../components/Productos';
 
-const Productos = () => {
+const Home = () => {
    const { productos, obtenerProductos } = useContext(ContextStore);
-   const [cargando, setcargando] = useState(true);
-   const navigate = useNavigate();
+   const [productosFiltrados, setProductosFiltrados] = useState();
 
-   const mostrarProducto = (id) => {
-      navigate(`producto/${id}`);
+   const filterProductos = (search) => {
+      console.log(search);
+      const filtrados = productos.filter((prod) => prod.title.includes(search));
+      setProductosFiltrados(filtrados);
    };
 
    useEffect(() => {
-      if (productos.length === 0) {
-         obtenerProductos();
-         console.log(productos);
-         setcargando(false);
-      } else {
-         setcargando(false);
-      }
+      obtenerProductos();
+      console.log(productos);
    }, []);
+
    return (
       <div
          style={{
@@ -30,64 +29,25 @@ const Productos = () => {
             textAlign: 'center',
          }}
       >
-         <h2 className="text-center">Departamento hombre</h2>
-         <div
-            id="carouselExampleSlidesOnly"
-            className="carousel slide"
-            data-ride="carousel"
+         <Buscador onSearch={filterProductos} />
+         <p
+            className="text-center"
+            style={{
+               color: 'rgb(185, 5, 5)',
+               fontWeight: 'bold',
+               fontSize: '53px',
+               paddingTop: '70px',
+            }}
          >
-            <div className="carousel-inner">
-               {productos.map((item) => (
-                  <div key={item.id}>
-                     <div className="carousel-item ">
-                        <img
-                           className="d-block w-10"
-                           src={item.image}
-                           alt="First slide"
-                        />
-                     </div>
-                  </div>
-               ))}
-            </div>
-         </div>
-         <div className="cards">
-            {cargando ? (
-               <p>Cargando...</p>
-            ) : (
-               productos?.map((item) => (
-                  <div
-                     key={item.id}
-                     style={{ height: '400px', width: '18rem' }}
-                  >
-                     <img
-                        src={item.image}
-                        alt={item.title}
-                        className="imagen"
-                     />
-                     <p className="titulo">{item.title}</p>
-                     <div
-                        style={{
-                           display: 'flex',
-                           justifyContent: 'space-between',
-                        }}
-                     >
-                        <p>{item.category}</p>
-                        <p>
-                           <strong>${item.price}</strong>
-                        </p>
-                     </div>
-                     <button
-                        className="btn btn-primary"
-                        onClick={() => mostrarProducto(item.id)}
-                     >
-                        Agregar
-                     </button>
-                  </div>
-               ))
-            )}
-         </div>
+            ProductStore
+         </p>
+         <Productos
+            productos={
+               productosFiltrados?.length > 0 ? productosFiltrados : productos
+            }
+         />
       </div>
    );
 };
 
-export default Productos;
+export default Home;

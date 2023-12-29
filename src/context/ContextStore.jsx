@@ -12,7 +12,11 @@ export const ProviderStore = ({ children }) => {
          const url = 'https://fakestoreapi.com/products';
          const respuesta = await fetch(url);
          const datos = await respuesta.json();
-         const Product = datos.map((item) => ({ ...item, cantidad: 0 }));
+         const Product = datos.map((item) => ({
+            ...item,
+            cantidad: 0,
+            likes: 0,
+         }));
          console.log(Product);
          setproductos(Product);
       } catch (e) {
