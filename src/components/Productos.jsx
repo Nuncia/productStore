@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import IconHeart from './IconHeart';
+import { ContextStore } from '../context/ContextStore';
 
 const Productos = ({ productos }) => {
+   const { incrementarLikes } = useContext(ContextStore);
    const [cargando, setcargando] = useState(false);
    const navigate = useNavigate();
    const mostrarProducto = (id) => {
@@ -11,7 +13,7 @@ const Productos = ({ productos }) => {
    };
 
    useEffect(() => {
-      console.log(productos);
+      // console.log(productos);
    }, []);
 
    return (
@@ -20,8 +22,21 @@ const Productos = ({ productos }) => {
             <p>Cargando...</p>
          ) : (
             productos?.map((item) => (
-               <div key={item.id} style={{ height: '400px', width: '18rem' }}>
-                  <img src={item.image} alt={item.title} className="imagen" />
+               <div
+                  key={item.id}
+                  style={{
+                     height: '400px',
+                     width: '18rem',
+                     backgroundColor: '#f8f9fa',
+                     flexGrow: '2',
+                  }}
+               >
+                  <img
+                     src={item.image}
+                     alt={item.title}
+                     className="imagen"
+                     onClick={() => incrementarLikes(item.id)}
+                  />
                   <IconHeart
                      className="corazon"
                      filled={item.likes > 0 ? true : false}

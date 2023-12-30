@@ -9,9 +9,8 @@ const Home = () => {
    const [productosFiltrados, setProductosFiltrados] = useState();
 
    const filterProductos = (search) => {
-      console.log(search);
+      // console.log(search);
       const filtrados = productos.filter((prod) =>
-         // console.log(prod.title)
          prod.title.toLowerCase().includes(search.toLowerCase())
       );
       setProductosFiltrados(filtrados);
@@ -19,7 +18,6 @@ const Home = () => {
 
    useEffect(() => {
       obtenerProductos();
-      console.log(productos);
    }, []);
 
    return (
@@ -32,7 +30,7 @@ const Home = () => {
             textAlign: 'center',
          }}
       >
-         <Buscador onSearch={filterProductos} />
+         <Buscador style={{ paddingLeft: 'auto' }} onSearch={filterProductos} />
          <p
             className="text-center"
             style={{

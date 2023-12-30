@@ -50,11 +50,20 @@ footer{
   gap: 20px;
 }
 .cards{
+  flex-direction: column;
   height: 400px;
-  /* width: 18rem; */
+  /* background-color: #f8f9fa; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 60px;
+  gap: 35px;
+  flex-grow: 2;
   padding-top: 84px;
+}
+.corazon{
+  border: 1px solid black;
+  position: absolute;
+}
+.medidas{
+  border: 1px solid black;
 }

@@ -6,6 +6,9 @@ export const ContextStore = createContext();
 export const ProviderStore = ({ children }) => {
    const [productos, setproductos] = useState([]);
    const [producto, setproducto] = useState({});
+   const [listaProductos, setListaProductos] = useState([]);
+   const [montoTotal, setMontoTotal] = useState(0);
+   const [cantidadProducto, setCantidadProducto] = useState(0);
 
    const obtenerProductos = useCallback(async () => {
       try {
@@ -17,7 +20,6 @@ export const ProviderStore = ({ children }) => {
             cantidad: 0,
             likes: 0,
          }));
-         console.log(Product);
          setproductos(Product);
       } catch (e) {
          console.log(e.message);
@@ -25,11 +27,48 @@ export const ProviderStore = ({ children }) => {
    });
 
    const obtenerProducto = (id) => {
-      console.log(id);
       const detalle = productos.find((item) => item.id == id);
       setproducto(detalle);
-      console.log(producto);
    };
+
+   const incrementarLikes = (id) => {
+      console.log(id);
+      setproductos((prevImagen) =>
+         prevImagen.map((producto) =>
+            producto.id === id ? { ...producto, likes: 1 } : producto
+         )
+      );
+   };
+
+   const agregarProducto = (producto) => {
+      // busca el producto en productos
+      const productoExistente = listaProductos.find(
+         (item) => item.id === producto.id
+      );
+      console.log(productoExistente);
+      if (productoExistente) {
+         //actualiza cantidad de producto existente
+         console.log(productoExistente);
+
+         const productosActualizados = listaProductos.map((item) =>
+            item.id === producto.id
+               ? { ...item, cantidad: item.cantidad + 1 }
+               : item
+         );
+
+         setListaProductos(productosActualizados);
+      } else {
+         //Agrega producto nuevo a la lista
+         setListaProductos([...listaProductos, { ...producto, cantidad: 1 }]);
+      }
+      console.log(listaProductos);
+      //Actualiza cantidad total y monto
+      setCantidadProducto(cantidadProducto + 1);
+      setMontoTotal(montoTotal + producto.price);
+      // console.log(cantidadProducto);
+      // console.log(montoTotal);
+   };
+
    return (
       <ContextStore.Provider
          value={{
@@ -39,6 +78,8 @@ export const ProviderStore = ({ children }) => {
             setproducto,
             obtenerProductos,
             obtenerProducto,
+            incrementarLikes,
+            agregarProducto,
          }}
       >
          {children}

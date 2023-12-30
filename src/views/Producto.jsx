@@ -3,13 +3,13 @@ import { ContextStore } from '../context/ContextStore';
 import { useParams } from 'react-router-dom';
 
 const Producto = () => {
-   const { producto, obtenerProducto } = useContext(ContextStore);
+   const { producto, obtenerProducto, agregarProducto } =
+      useContext(ContextStore);
    const [cargando, setcargando] = useState(true);
    const { id } = useParams();
 
    useEffect(() => {
       obtenerProducto(id);
-      console.log('obtenerProducto');
       setcargando(false);
    }, [id]);
    return (
@@ -28,7 +28,10 @@ const Producto = () => {
                      justifyContent: 'center',
                   }}
                >
-                  <h2 className="text-center italic hover:not-italic font-black">
+                  <h2
+                     className="text-center italic hover:not-italic font-black"
+                     style={{ marginTop: '50px' }}
+                  >
                      {producto.title}
                   </h2>
                   <div
@@ -38,12 +41,39 @@ const Producto = () => {
                         paddingTop: '50px',
                      }}
                   >
-                     <img
-                        style={{ width: '300px' }}
-                        // className="h-96 w-72"
-                        src={producto.image}
-                        alt={producto.title}
-                     />
+                     <div
+                        style={{
+                           display: 'flex',
+                           justifyContent: 'center',
+                           alignItems: 'center',
+                        }}
+                     >
+                        <img
+                           style={{ width: '300px' }}
+                           src={producto.image}
+                           alt={producto.title}
+                        />
+                     </div>
+                     <div
+                        style={{
+                           display: 'flex',
+                           justifyContent: 'center',
+                           flexDirection: 'column',
+                           marginLeft: '60px',
+                        }}
+                     >
+                        <select
+                           className="form-select"
+                           aria-label="Default select example"
+                        >
+                           <option defaultValue="Selecciona una talla">
+                              Selecciona una talla
+                           </option>
+                           <option value="S">S</option>
+                           <option value="M">M</option>
+                           <option value="L">L</option>
+                        </select>
+                     </div>
                   </div>
                </div>
                <div className="descripcion">
@@ -53,7 +83,10 @@ const Producto = () => {
                   <div
                      style={{ display: 'flex', justifyContent: 'space-around' }}
                   >
-                     <button className="btn btn-primary text-center">
+                     <button
+                        className="btn btn-primary text-center"
+                        onClick={() => agregarProducto(producto)}
+                     >
                         Agregar
                      </button>
                      <p>

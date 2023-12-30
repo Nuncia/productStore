@@ -9,7 +9,7 @@ const Buscador = ({ onSearch }) => {
       onSearch(buscandoProducto);
    };
    return (
-      <div>
+      <div style={{ marginLeft: 'auto' }}>
          <form action="" onSubmit={handleSearch}>
             <input
                type="text"
