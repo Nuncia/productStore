@@ -41,32 +41,23 @@ export const ProviderStore = ({ children }) => {
    };
 
    const agregarProducto = (producto) => {
-      // busca el producto en productos
-      const productoExistente = listaProductos.find(
-         (item) => item.id === producto.id
-      );
-      console.log(productoExistente);
-      if (productoExistente) {
-         //actualiza cantidad de producto existente
-         console.log(productoExistente);
+      console.log(listaProductos);
+      // Busca el producto en productos
+      const products = listaProductos.filter((item) => item.id === producto.id);
+      console.log(products);
 
-         const productosActualizados = listaProductos.map((item) =>
+      if (products.length > 0) {
+         console.log('mayor que cero');
+         const listadoActualizado = listaProductos.map((item) =>
             item.id === producto.id
                ? { ...item, cantidad: item.cantidad + 1 }
                : item
          );
-
-         setListaProductos(productosActualizados);
+         setListaProductos(listadoActualizado);
       } else {
-         //Agrega producto nuevo a la lista
+         console.log('igual a cero');
          setListaProductos([...listaProductos, { ...producto, cantidad: 1 }]);
       }
-      console.log(listaProductos);
-      //Actualiza cantidad total y monto
-      setCantidadProducto(cantidadProducto + 1);
-      setMontoTotal(montoTotal + producto.price);
-      // console.log(cantidadProducto);
-      // console.log(montoTotal);
    };
 
    return (
