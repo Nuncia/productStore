@@ -30,7 +30,7 @@ const Producto = () => {
                >
                   <h2
                      className="text-center italic hover:not-italic font-black"
-                     style={{ marginTop: '50px' }}
+                     style={{ marginTop: '50px', paddingTop: '100px' }}
                   >
                      {producto.title}
                   </h2>

@@ -1,58 +1,81 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
 import { BsBag } from 'react-icons/bs';
 import { CiUser } from 'react-icons/ci';
+import { NavLink } from 'react-router-dom';
+import { ContextStore } from '../context/ContextStore';
 
 const NavBar = () => {
    const setActive = (isActive) => (isActive ? 'active' : 'inActive');
+   const { cantidadProducto } = useContext(ContextStore);
    return (
-      <div>
-         <Navbar expand="lg" className="bg-body-tertiary">
-            <Container>
-               <Navbar.Brand href="#home">
-                  <NavLink className={setActive} to="/">
-                     PS
-                  </NavLink>
-               </Navbar.Brand>
-               <Navbar.Toggle aria-controls="basic-navbar-nav" />
-               <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="me-auto">
-                     <NavLink className={setActive} to="/">
-                        Inicio
-                     </NavLink>
-                     <NavDropdown title="Categorias" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">
-                           {`Men's clothing`}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">
-                           Jewelery
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">
-                           Electronics
-                        </NavDropdown.Item>
-                        <NavDropdown.Item>{`Women's clothing`}</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">
-                           Separated link
-                        </NavDropdown.Item>
-                     </NavDropdown>
-                  </Nav>
+      <nav className="navBar">
+         <div
+            style={{
+               marginLeft: '20px',
+               minWidth: '100vh',
+               backgroundColor: 'white',
+               display: 'flex',
+               alignItems: 'center',
+            }}
+         >
+            <NavLink to="/" className={setActive}>
+               PS
+            </NavLink>
+            <NavLink style={{ marginLeft: '30px', marginRight: '10px' }}>
+               Men
+            </NavLink>
+            <NavLink style={{ marginRight: '10px' }}>Jewelly</NavLink>
+            <NavLink style={{ marginRight: '10px' }}>Electronic</NavLink>
+            <NavLink>Woman</NavLink>
+         </div>
+         <div
+            style={{
+               fontSize: '20px',
+               marginRight: '50px',
+               display: 'flex',
+               alignItems: 'start',
+            }}
+         >
+            <NavLink to="/login" className={setActive}>
+               <CiUser />
+            </NavLink>
+            &nbsp;
+            <NavLink
+               to="/carrito"
+               className={setActive}
+               style={{ marginTop: '5px' }}
+            >
+               <BsBag
+                  style={{
+                     position: 'absolute',
+                     zIndex: '1',
+                     // paddingTop: '10px',
+                  }}
+                  className="bg-transparent"
+               />
+               {cantidadProducto > 0 ? (
                   <div
                      style={{
-                        fontSize: '20px',
+                        position: 'absolute',
+                        zIndex: '2',
+                        backgroundColor: 'red',
+                        borderRadius: '50%',
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '15px',
+                        color: 'white',
+                        fontSize: '10px',
+                        textAlign: 'center',
                      }}
                   >
-                     <CiUser />
-                     &nbsp;
-                     <BsBag className="bg-transparent" />
+                     {cantidadProducto}
                   </div>
-               </Navbar.Collapse>
-            </Container>
-         </Navbar>
-      </div>
+               ) : (
+                  ''
+               )}
+            </NavLink>
+         </div>
+      </nav>
    );
 };
 

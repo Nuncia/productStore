@@ -12,57 +12,60 @@ const Productos = ({ productos }) => {
       navigate(`producto/${id}`);
    };
 
-   useEffect(() => {
-      // console.log(productos);
-   }, []);
+   useEffect(() => {}, []);
 
    return (
-      <div className="cards">
-         {cargando ? (
-            <p>Cargando...</p>
-         ) : (
-            productos?.map((item) => (
-               <div
-                  key={item.id}
-                  style={{
-                     height: '400px',
-                     width: '18rem',
-                     backgroundColor: '#f8f9fa',
-                     flexGrow: '2',
-                  }}
-               >
-                  <img
-                     src={item.image}
-                     alt={item.title}
-                     className="imagen"
-                     onClick={() => incrementarLikes(item.id)}
-                  />
-                  <IconHeart
-                     className="corazon"
-                     filled={item.likes > 0 ? true : false}
-                  />
-                  <p className="titulo">{item.title}</p>
-
+      <div>
+         <div className="cards">
+            {cargando ? (
+               <p>Cargando...</p>
+            ) : (
+               productos?.map((item) => (
                   <div
+                     key={item.id}
                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
+                        height: '400px',
+                        width: '18rem',
+                        backgroundColor: '#f8f9fa',
+                        flexGrow: '2',
                      }}
                   >
-                     <p>{item.category}</p>
-                     <p>
-                        <strong>${item.price}</strong>
-                     </p>
+                     <img
+                        src={item.image}
+                        alt={item.title}
+                        className="imagen"
+                        onClick={() => incrementarLikes(item.id)}
+                     />
+                     <IconHeart
+                        className="corazon"
+                        filled={item.likes > 0 ? true : false}
+                     />
+                     <p className="titulo">{item.title}</p>
+
+                     <div
+                        style={{
+                           display: 'flex',
+                           justifyContent: 'space-between',
+                        }}
+                     >
+                        <p>{item.category}</p>
+                        <p>
+                           <strong>${item.price}</strong>
+                        </p>
+                     </div>
+                     <button
+                        className="btn btn-primary"
+                        onClick={() => mostrarProducto(item.id)}
+                     >
+                        Agregar
+                     </button>
                   </div>
-                  <button
-                     className="btn btn-primary"
-                     onClick={() => mostrarProducto(item.id)}
-                  >
-                     Agregar
-                  </button>
-               </div>
-            ))
-         )}
+               ))
+            )}
+         </div>
+         <button id="btnArriba" className="btn btn-primary">
+            <strong>△</strong>
+         </button>
       </div>
    );
 };

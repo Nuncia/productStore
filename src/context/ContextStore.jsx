@@ -47,17 +47,23 @@ export const ProviderStore = ({ children }) => {
       console.log(products);
 
       if (products.length > 0) {
-         console.log('mayor que cero');
          const listadoActualizado = listaProductos.map((item) =>
             item.id === producto.id
                ? { ...item, cantidad: item.cantidad + 1 }
                : item
          );
+         console.log(
+            ' listadoActualizado mayor que cero: ',
+            listadoActualizado
+         );
          setListaProductos(listadoActualizado);
       } else {
-         console.log('igual a cero');
-         setListaProductos([...listaProductos, { ...producto, cantidad: 1 }]);
+         setListaProductos({ ...producto, cantidad: 1 });
+         console.log('igual a cero:', listaProductos);
       }
+      console.log(listaProductos);
+      setCantidadProducto(cantidadProducto + 1);
+      setMontoTotal(montoTotal + producto.price);
    };
 
    return (
@@ -71,6 +77,10 @@ export const ProviderStore = ({ children }) => {
             obtenerProducto,
             incrementarLikes,
             agregarProducto,
+            montoTotal,
+            cantidadProducto,
+            setCantidadProducto,
+            setMontoTotal,
          }}
       >
          {children}

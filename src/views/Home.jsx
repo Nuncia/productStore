@@ -21,32 +21,48 @@ const Home = () => {
    }, []);
 
    return (
-      <div
-         style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            textAlign: 'center',
-         }}
-      >
-         <Buscador style={{ paddingLeft: 'auto' }} onSearch={filterProductos} />
-         <p
-            className="text-center"
+      <div>
+         <div
             style={{
-               color: 'rgb(185, 5, 5)',
-               fontWeight: 'bold',
-               fontSize: '53px',
-               paddingTop: '70px',
+               display: 'flex',
+               flexWrap: 'wrap',
+               justifyContent: 'center',
+               flexDirection: 'column',
+               textAlign: 'center',
+               position: 'relative',
             }}
          >
-            ProductStore
-         </p>
-         <Productos
-            productos={
-               productosFiltrados?.length > 0 ? productosFiltrados : productos
-            }
-         />
+            <Buscador
+               style={{ paddingLeft: 'auto' }}
+               onSearch={filterProductos}
+            />
+            <div>
+               <h2
+                  className="text-center"
+                  style={{
+                     color: 'rgb(185, 5, 5)',
+                     fontWeight: 'bold',
+                     fontSize: '53px',
+                     paddingTop: '70px',
+                     marginTop: '80px',
+                  }}
+               >
+                  ProductStore
+               </h2>
+               <div style={{ position: 'absolute', zIndex: -1 }}>
+                  <Productos
+                     productos={
+                        productosFiltrados?.length > 0
+                           ? productosFiltrados
+                           : productos
+                     }
+                  />
+               </div>
+            </div>
+            {/* <button id="btnArriba" className="btn btn-primary">
+               <strong>△</strong>
+            </button> */}
+         </div>
       </div>
    );
 };
