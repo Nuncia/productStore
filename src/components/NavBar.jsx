@@ -6,7 +6,7 @@ import { ContextStore } from '../context/ContextStore';
 
 const NavBar = () => {
    const setActive = (isActive) => (isActive ? 'active' : 'inActive');
-   const { cantidadProducto } = useContext(ContextStore);
+   const { cantidadProducto, usuario } = useContext(ContextStore);
    return (
       <nav className="navBar">
          <div
@@ -36,6 +36,13 @@ const NavBar = () => {
                alignItems: 'start',
             }}
          >
+            {usuario ? (
+               <div style={{ marginRight: '20px' }}>
+                  Bienvenido&nbsp;{usuario}
+               </div>
+            ) : (
+               ''
+            )}
             <NavLink to="/login" className={setActive}>
                <CiUser />
             </NavLink>
@@ -49,6 +56,7 @@ const NavBar = () => {
                   style={{
                      position: 'absolute',
                      zIndex: '1',
+                     marginRight: '20px',
                      // paddingTop: '10px',
                   }}
                   className="bg-transparent"

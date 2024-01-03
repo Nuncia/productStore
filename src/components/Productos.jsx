@@ -5,11 +5,12 @@ import IconHeart from './IconHeart';
 import { ContextStore } from '../context/ContextStore';
 
 const Productos = ({ productos }) => {
-   const { incrementarLikes } = useContext(ContextStore);
+   const { incrementarLikes, listaProductos } = useContext(ContextStore);
    const [cargando, setcargando] = useState(false);
    const navigate = useNavigate();
    const mostrarProducto = (id) => {
       navigate(`producto/${id}`);
+      console.log(listaProductos);
    };
 
    useEffect(() => {}, []);
@@ -57,15 +58,15 @@ const Productos = ({ productos }) => {
                         className="btn btn-primary"
                         onClick={() => mostrarProducto(item.id)}
                      >
-                        Agregar
+                        Ver
                      </button>
                   </div>
                ))
             )}
          </div>
-         <button id="btnArriba" className="btn btn-primary">
+         {/* <button id="btnArriba" className="btn btn-primary">
             <strong>△</strong>
-         </button>
+         </button> */}
       </div>
    );
 };

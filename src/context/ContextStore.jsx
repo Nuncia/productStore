@@ -9,6 +9,8 @@ export const ProviderStore = ({ children }) => {
    const [listaProductos, setListaProductos] = useState([]);
    const [montoTotal, setMontoTotal] = useState(0);
    const [cantidadProducto, setCantidadProducto] = useState(0);
+   const [usuario, setUsuario] = useState('');
+   const [contrasenya, setContrasenya] = useState('');
 
    const obtenerProductos = useCallback(async () => {
       try {
@@ -39,31 +41,32 @@ export const ProviderStore = ({ children }) => {
          )
       );
    };
-
+   // Busca si existe el producto en la lista de productos
    const agregarProducto = (producto) => {
-      console.log(listaProductos);
-      // Busca el producto en productos
-      const products = listaProductos.filter((item) => item.id === producto.id);
-      console.log(products);
-
-      if (products.length > 0) {
-         const listadoActualizado = listaProductos.map((item) =>
+      event.preventDefault();
+      const productoExiste = listaProductos.find(
+         (item) => item.id === producto.id
+      );
+      if (productoExiste) {
+         //actualiza cantidad de producto existente
+         const productoActualizados = listaProductos.map((item) =>
             item.id === producto.id
                ? { ...item, cantidad: item.cantidad + 1 }
                : item
          );
-         console.log(
-            ' listadoActualizado mayor que cero: ',
-            listadoActualizado
-         );
-         setListaProductos(listadoActualizado);
+         setListaProductos(productoActualizados);
       } else {
-         setListaProductos({ ...producto, cantidad: 1 });
-         console.log('igual a cero:', listaProductos);
+         //agrega producto nuevo a la lista
+         setListaProductos([...listaProductos, { ...producto, cantidad: 1 }]);
       }
+      //Actualiza cantidad total y monto
       console.log(listaProductos);
       setCantidadProducto(cantidadProducto + 1);
       setMontoTotal(montoTotal + producto.price);
+   };
+
+   const cargarListado = () => {
+      console.log(listaProductos);
    };
 
    return (
@@ -81,6 +84,11 @@ export const ProviderStore = ({ children }) => {
             cantidadProducto,
             setCantidadProducto,
             setMontoTotal,
+            cargarListado,
+            usuario,
+            setUsuario,
+            contrasenya,
+            setContrasenya,
          }}
       >
          {children}

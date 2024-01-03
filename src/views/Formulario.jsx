@@ -1,6 +1,26 @@
+import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { ContextStore } from '../context/ContextStore';
+import { useNavigate } from 'react-router-dom';
 
 const Formulario = () => {
+   const { usuario, setUsuario, contrasenya, setContrasenya } =
+      useContext(ContextStore);
+   const [loginUsuario, setLoginUsuario] = useState('');
+   const navigate = useNavigate();
+
+   const capitalizarPrimeraLetra = (palabra) => {
+      return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+   };
+
+   const handleSubmit = (event) => {
+      event.preventDefault();
+      const palabraModificada = capitalizarPrimeraLetra(loginUsuario);
+      setUsuario(palabraModificada);
+      navigate(`/`);
+      setContrasenya('');
+   };
+
    return (
       <section>
          <h1
@@ -13,16 +33,30 @@ const Formulario = () => {
             Iniciar sesión con su cuenta
          </h1>
          <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
-            <form className="formulario">
+            <form className="formulario" onSubmit={handleSubmit}>
                <p style={{ marginBottom: '0px' }}>
                   Dirección de correo electrónico
                   <strong style={{ color: 'red' }}>*</strong>
                </p>
-               <input type="text" className="inputLogin" />
+               <input
+                  type="text"
+                  className="inputLogin"
+                  name="loginUsuario"
+                  value={loginUsuario}
+                  onChange={(e) => setLoginUsuario(e.target.value)}
+               />
                <p style={{ marginBottom: '0px' }}>
                   Contraseña <strong style={{ color: 'red' }}>*</strong>
                </p>
-               <input type="password" className="inputLogin" />
+               <input
+                  type="password"
+                  className="inputLogin"
+                  value={contrasenya}
+                  name="contrasenya"
+                  onChange={(e) => {
+                     setContrasenya(e.target.value);
+                  }}
+               />
                <button
                   className="btn border-t-orange-500"
                   style={{
@@ -37,7 +71,7 @@ const Formulario = () => {
                   to="/"
                   style={{ textAlign: 'center', textDecoration: 'black' }}
                >
-                  ¿Olvió su contraseña?
+                  ¿Olvidó su contraseña?
                </NavLink>
                <div
                   style={{

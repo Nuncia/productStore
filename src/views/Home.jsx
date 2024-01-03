@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ContextStore } from '../context/ContextStore';
 import Buscador from '../components/Buscador';
 import Productos from '../components/Productos';
+import Carrusel from '../components/Carrusel';
 
 const Home = () => {
    const { productos, obtenerProductos } = useContext(ContextStore);
@@ -14,6 +15,51 @@ const Home = () => {
          prod.title.toLowerCase().includes(search.toLowerCase())
       );
       setProductosFiltrados(filtrados);
+   };
+
+   // const subirPagina = () => {
+   // document.addEventListener('DOMContentLoaded', function () {
+   //    // se obtiene boton
+   //    var botonArriba = document.getElementById('btnArriba');
+
+   //    // muestra y oculta el boton segun posicion de desplazamiento
+   //    window.scroll = function () {
+   //       if (
+   //          document.body.scrollTop > 20 ||
+   //          document.documentElement.scrollTop > 20
+   //       ) {
+   //          botonArriba.style.display = 'block';
+   //       } else {
+   //          botonArriba.style.display = 'none';
+   //       }
+   //    };
+
+   //    // hacer scroll hascia arriba cuando se presiona el boton.
+   //    botonArriba.addEventListener('click', () => {
+   //       document.body.scrollTop = 0;
+   //       document.documentElement.scrollTop = 0;
+   //    });
+   // });
+   // };
+
+   function scrollArriba() {
+      window.scrollTo({
+         top: 0,
+         behavior: 'smooth',
+      });
+   }
+
+   window.onscroll = () => {
+      const botonScroll = document.getElementById('btnAceptar');
+      console.log(botonScroll);
+      if (
+         document.body.scrollTop > 20 ||
+         document.documentElement.scrollTop > 20
+      ) {
+         botonScroll.style.opacity = 1;
+      } else {
+         botonScroll.style.opacity = 0;
+      }
    };
 
    useEffect(() => {
@@ -33,9 +79,10 @@ const Home = () => {
             }}
          >
             <Buscador
-               style={{ paddingLeft: 'auto' }}
+               style={{ paddingLeft: 'auto', marginTop: '100px' }}
                onSearch={filterProductos}
             />
+            <Carrusel />
             <div>
                <h2
                   className="text-center"
@@ -49,6 +96,7 @@ const Home = () => {
                >
                   ProductStore
                </h2>
+               <Carrusel />
                <div style={{ position: 'absolute', zIndex: -1 }}>
                   <Productos
                      productos={
@@ -59,9 +107,13 @@ const Home = () => {
                   />
                </div>
             </div>
-            {/* <button id="btnArriba" className="btn btn-primary">
+            <button
+               id="btnArriba"
+               className="btn btn-primary"
+               onClick={scrollArriba}
+            >
                <strong>△</strong>
-            </button> */}
+            </button>
          </div>
       </div>
    );

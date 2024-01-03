@@ -3,8 +3,8 @@ import { ProviderStore } from './context/ContextStore';
 import Home from './views/Home';
 import NavBar from './components/NavBar';
 import Producto from './views/Producto';
-import Formulario from './components/Formulario';
-import Carrito from './views/Carrito';
+import Formulario from './views/Formulario';
+import Carrito from './components/Carrito';
 
 function App() {
    return (

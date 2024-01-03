@@ -92,15 +92,19 @@ footer{
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);;
 }
 #btnArriba{
-  /* width: 60px; */
-  /* height: 60px; */
-  margin-left: auto;
-  border-radius: 45%;
   position: fixed;
-  /* z-index: 3px; */
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #3498db;
+  color: black;
+  border: none;
   cursor: pointer;
-  top: auto;
-  border: 1px solid red;
-  background-color: rgb(40, 40, 203);
-  display:none;
+  border: 4x solid transparent;
+  transition: all 300ms ease;
+}
+
+#btnArriba:hover{
+  transform: scale(1.1);
+  border-color: rgba(0, 0, 0, 0.1);
 }
