@@ -38,7 +38,7 @@ const NavBar = () => {
          >
             {usuario ? (
                <div style={{ marginRight: '20px' }}>
-                  Bienvenido&nbsp;{usuario}
+                  Bienvenid@&nbsp;{usuario}
                </div>
             ) : (
                ''

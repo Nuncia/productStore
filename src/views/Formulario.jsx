@@ -1,90 +1,88 @@
 import { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { ContextStore } from '../context/ContextStore';
-import { useNavigate } from 'react-router-dom';
 
 const Formulario = () => {
-   const { usuario, setUsuario, contrasenya, setContrasenya } =
-      useContext(ContextStore);
-   const [loginUsuario, setLoginUsuario] = useState('');
-   const navigate = useNavigate();
+   const { setUsuario, usuario } = useContext(ContextStore);
+   const [nombre, setNombre] = useState('');
+   const [email, setEmail] = useState('');
+   const [contrasenya, setContrasenya] = useState('');
+   const [mensaje, setMensaje] = useState('');
 
-   const capitalizarPrimeraLetra = (palabra) => {
-      return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      let formaValida = true;
+      if (!nombre.trim() || email === '' || contrasenya === '') {
+         setMensaje('Todos los campos son obligatorios');
+      } else {
+         setNombre('');
+         setEmail('');
+         setContrasenya('');
+         setUsuario(nombre);
+         setMensaje('Usuario creado');
+      }
    };
-
-   const handleSubmit = (event) => {
-      event.preventDefault();
-      const palabraModificada = capitalizarPrimeraLetra(loginUsuario);
-      setUsuario(palabraModificada);
-      navigate(`/`);
-      setContrasenya('');
-   };
-
    return (
       <section>
-         <h1
+         <h2
             style={{
+               paddingTop: '100px',
                textAlign: 'center',
-               paddingTop: '150px',
                fontWeight: 'bold',
             }}
          >
-            Iniciar sesión con su cuenta
-         </h1>
-         <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
-            <form className="formulario" onSubmit={handleSubmit}>
-               <p style={{ marginBottom: '0px' }}>
-                  Dirección de correo electrónico
-                  <strong style={{ color: 'red' }}>*</strong>
-               </p>
+            Registrarse
+         </h2>
+         <div
+            style={{
+               paddingTop: '80px',
+               // width: '600px',
+               display: 'flex',
+               justifyContent: 'center',
+               flexDirection: 'column',
+            }}
+         >
+            <form
+               action=""
+               className="formulario"
+               onSubmit={handleSubmit}
+               style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px',
+                  width: '',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+               }}
+            >
                <input
                   type="text"
                   className="inputLogin"
-                  name="loginUsuario"
-                  value={loginUsuario}
-                  onChange={(e) => setLoginUsuario(e.target.value)}
+                  placeholder="Nombre completo"
+                  name="nombre"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
                />
-               <p style={{ marginBottom: '0px' }}>
-                  Contraseña <strong style={{ color: 'red' }}>*</strong>
-               </p>
                <input
-                  type="password"
                   className="inputLogin"
-                  value={contrasenya}
-                  name="contrasenya"
-                  onChange={(e) => {
-                     setContrasenya(e.target.value);
-                  }}
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                />
-               <button
-                  className="btn border-t-orange-500"
-                  style={{
-                     width: '160px',
-                     marginLeft: 'auto',
-                     marginRight: 'auto',
-                  }}
-               >
-                  Iniciar sesión
+               <input
+                  className="inputLogin"
+                  type="password"
+                  placeholder="Password"
+                  name="contrasenya"
+                  value={contrasenya}
+                  onChange={(e) => setContrasenya(e.target.value)}
+                  autoComplete="on"
+               />
+               <button type="submit" className="btn border-t-orange-500">
+                  Aceptar
                </button>
-               <NavLink
-                  to="/"
-                  style={{ textAlign: 'center', textDecoration: 'black' }}
-               >
-                  ¿Olvidó su contraseña?
-               </NavLink>
-               <div
-                  style={{
-                     display: 'flex',
-                     textAlign: 'center',
-                     justifyContent: 'center',
-                  }}
-               >
-                  ¿No tiene una cuenta? &nbsp;
-                  <NavLink to="/" style={{ textAlign: 'center' }}>
-                     Cree una aquí
-                  </NavLink>
-               </div>
+               {mensaje ? <h4>{mensaje}</h4> : ''}
             </form>
          </div>
       </section>

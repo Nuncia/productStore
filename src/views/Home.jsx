@@ -17,31 +17,6 @@ const Home = () => {
       setProductosFiltrados(filtrados);
    };
 
-   // const subirPagina = () => {
-   // document.addEventListener('DOMContentLoaded', function () {
-   //    // se obtiene boton
-   //    var botonArriba = document.getElementById('btnArriba');
-
-   //    // muestra y oculta el boton segun posicion de desplazamiento
-   //    window.scroll = function () {
-   //       if (
-   //          document.body.scrollTop > 20 ||
-   //          document.documentElement.scrollTop > 20
-   //       ) {
-   //          botonArriba.style.display = 'block';
-   //       } else {
-   //          botonArriba.style.display = 'none';
-   //       }
-   //    };
-
-   //    // hacer scroll hascia arriba cuando se presiona el boton.
-   //    botonArriba.addEventListener('click', () => {
-   //       document.body.scrollTop = 0;
-   //       document.documentElement.scrollTop = 0;
-   //    });
-   // });
-   // };
-
    function scrollArriba() {
       window.scrollTo({
          top: 0,
