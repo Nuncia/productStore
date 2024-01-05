@@ -16,7 +16,9 @@ const Productos = ({ productos }) => {
    useEffect(() => {}, []);
 
    return (
-      <div style={{ marginTop: '300px' }}>
+      <div
+      // style={{ marginTop: '300px' }}
+      >
          <div className="cards">
             {cargando ? (
                <p>Cargando...</p>
@@ -28,7 +30,7 @@ const Productos = ({ productos }) => {
                         height: '400px',
                         width: '18rem',
                         backgroundColor: '#f8f9fa',
-                        flexGrow: '2',
+                        // flexGrow: '2',
                      }}
                   >
                      <img

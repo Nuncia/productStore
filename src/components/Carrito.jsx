@@ -7,14 +7,14 @@ const Carrito = () => {
    const [cargando, setCargando] = useState(false);
 
    useEffect(() => {
-      // cargarListado();
+      cargarListado();
       console.log(listaProductos);
-      if (listaProductos) {
+      if (listaProductos > 0) {
          setCargando(false);
       } else {
          setCargando(true);
       }
-   }, []);
+   }, [listaProductos]);
    return (
       <div
          style={{

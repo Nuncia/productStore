@@ -67,14 +67,16 @@ export const ProviderStore = ({ children }) => {
    };
 
    const buscarCategoria = (categoria) => {
+      setListaCategoria([]);
       console.log(categoria);
-      console.log(productos);
+      // console.log(productos);
       const lista = productos.filter((item) => item.category == categoria);
       console.log(lista);
       setListaCategoria(lista);
    };
 
    const cargarListado = () => {
+      setListaProductos(producto);
       console.log(listaProductos);
    };
 

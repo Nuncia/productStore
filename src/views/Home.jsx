@@ -75,7 +75,13 @@ const Home = () => {
                <div>
                   <Carrusel style={{ top: '20px' }} />
                </div>
-               <div style={{ position: 'absolute', zIndex: -1 }}>
+               <div
+                  style={{
+                     position: 'absolute',
+                     zIndex: -1,
+                     marginTop: '300px',
+                  }}
+               >
                   <Productos
                      productos={
                         productosFiltrados?.length > 0
