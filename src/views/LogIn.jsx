@@ -2,11 +2,15 @@ import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ContextStore } from '../context/ContextStore';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const LogIn = () => {
    const { setUsuario, contrasenya, setContrasenya } = useContext(ContextStore);
    const [loginUsuario, setLoginUsuario] = useState('');
+   const [show, setShow] = useState(false);
    const navigate = useNavigate();
+   const [mensaje, setMensaje] = useState('');
 
    const capitalizarPrimeraLetra = (palabra) => {
       return palabra.charAt(0).toUpperCase() + palabra.slice(1);
@@ -14,10 +18,28 @@ const LogIn = () => {
 
    const handleSubmit = (event) => {
       event.preventDefault();
-      const palabraModificada = capitalizarPrimeraLetra(loginUsuario);
-      setUsuario(palabraModificada);
-      navigate(`/`);
-      setContrasenya('');
+      if (loginUsuario.trim() || contrasenya) {
+         const palabraModificada = capitalizarPrimeraLetra(loginUsuario);
+         setUsuario(palabraModificada);
+         navigate(`/`);
+         setContrasenya('');
+      } else {
+         // setMensaje('Todos loss campos son obligatorios');
+         alert('Todos loss campos son obligatorios');
+      }
+   };
+
+   const handleClose = () => {
+      setShow(false);
+   };
+
+   const handleShow = () => {
+      setShow(true);
+   };
+
+   const handleEnviar = () => {
+      setShow(false);
+      alert('Espera un correo con el código de recuperación');
    };
 
    return (
@@ -67,12 +89,20 @@ const LogIn = () => {
                >
                   Iniciar sesión
                </button>
-               <NavLink
-                  to="/"
-                  style={{ textAlign: 'center', textDecoration: 'black' }}
+               {/* <button style={{ textAlign: 'center', textDecoration: 'black' }}> */}
+               <a
+                  // variant=''
+                  onClick={handleShow}
+                  className="btn border-t-orange-500"
+                  style={{
+                     width: '160px',
+                     marginLeft: 'auto',
+                     marginRight: 'auto',
+                  }}
                >
                   ¿Olvidó su contraseña?
-               </NavLink>
+               </a>
+               {/* </button> */}
                <div
                   style={{
                      display: 'flex',
@@ -87,6 +117,23 @@ const LogIn = () => {
                </div>
             </form>
          </div>
+         <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+               <Modal.Title>Recuperación de cuenta</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+               Ingresa tu correo &nbsp;
+               <input type="email" name="correo" placeholder="tuCorreo@cl" />
+            </Modal.Body>
+            <Modal.Footer>
+               <Button variant="secondary" onClick={handleClose}>
+                  Cerrar
+               </Button>
+               <Button variant="primary" onClick={handleEnviar}>
+                  Enviar
+               </Button>
+            </Modal.Footer>
+         </Modal>
       </section>
    );
 };

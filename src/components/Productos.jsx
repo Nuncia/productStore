@@ -8,15 +8,15 @@ const Productos = ({ productos }) => {
    const { incrementarLikes, listaProductos } = useContext(ContextStore);
    const [cargando, setcargando] = useState(false);
    const navigate = useNavigate();
+
    const mostrarProducto = (id) => {
       navigate(`producto/${id}`);
-      console.log(listaProductos);
    };
 
    useEffect(() => {}, []);
 
    return (
-      <div>
+      <div style={{ marginTop: '300px' }}>
          <div className="cards">
             {cargando ? (
                <p>Cargando...</p>
@@ -64,9 +64,6 @@ const Productos = ({ productos }) => {
                ))
             )}
          </div>
-         {/* <button id="btnArriba" className="btn btn-primary">
-            <strong>△</strong>
-         </button> */}
       </div>
    );
 };

@@ -9,7 +9,7 @@ const Buscador = ({ onSearch }) => {
       onSearch(buscandoProducto);
    };
    return (
-      <div style={{ marginLeft: 'auto' }}>
+      <div style={{ marginLeft: 'auto', marginTop: '100px' }}>
          <form action="" onSubmit={handleSearch}>
             <input
                type="text"
@@ -24,8 +24,8 @@ const Buscador = ({ onSearch }) => {
    );
 };
 
-// Buscador.propTypes = {
-//    onSearch: PropTypes.any,
-// };
+Buscador.propTypes = {
+   onSearch: PropTypes.any,
+};
 
 export default Buscador;

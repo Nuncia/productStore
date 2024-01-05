@@ -2,13 +2,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useContext, useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { ContextStore } from '../context/ContextStore';
-
-// import ExampleCarouselImage from 'components/ExampleCarouselImage';
+import { useNavigate } from 'react-router-dom';
 
 function Carrusel() {
    const { productos } = useContext(ContextStore);
    const [cargando, setCargando] = useState(true);
-   // const [slides, setSlides] = useState([{}]);
+   const navigate = useNavigate();
+
+   const buscarProducto = (id) => {
+      navigate(`producto/${id}`);
+   };
 
    useEffect(() => {
       if (productos) {
@@ -21,23 +24,26 @@ function Carrusel() {
    return (
       <>
          {cargando ? (
-            <Carousel>
-               {productos.map((producto, index) => (
-                  <Carousel.Item key={producto.id}>
-                     <img
-                        className="d-block w-100"
-                        src={producto.image}
-                        alt={`Slide ${index}`}
-                     />
-                     <Carousel.Caption>
-                        <h3>{producto.title}</h3>
-                        <p>{producto.description}</p>
-                     </Carousel.Caption>
-                  </Carousel.Item>
-               ))}
-            </Carousel>
+            <div></div>
          ) : (
-            ''
+            <div style={{ top: '175px' }}>
+               <Carousel data-bs-theme="dark" interval={2000} showArros={true}>
+                  {productos.map((producto) => (
+                     <Carousel.Item interval={1000} key={producto.id}>
+                        <img
+                           style={{ width: '100px', height: '100px' }}
+                           className="d-block"
+                           src={producto.image}
+                           alt={producto.id}
+                           onClick={() => buscarProducto(producto.id)}
+                        />
+                        <Carousel.Caption>
+                           {/* <p style={{ color: 'black' }}>{producto.title}</p> */}
+                        </Carousel.Caption>
+                     </Carousel.Item>
+                  ))}
+               </Carousel>
+            </div>
          )}
       </>
    );

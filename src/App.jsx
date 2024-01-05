@@ -6,6 +6,7 @@ import Producto from './views/Producto';
 import LogIn from './views/LogIn';
 import Carrito from './components/Carrito';
 import Formulario from './views/Formulario';
+import Categoria from './views/Categoria';
 
 function App() {
    return (
@@ -19,6 +20,7 @@ function App() {
                   <Route path="/login" element={<LogIn />} />
                   <Route path="/nuevoUsuario" element={<Formulario />} />
                   <Route path="/carrito" element={<Carrito />} />
+                  <Route path="/categoria/:categoria" element={<Categoria />} />
                </Routes>
             </BrowserRouter>
          </ProviderStore>

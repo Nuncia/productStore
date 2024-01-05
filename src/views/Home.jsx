@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { ContextStore } from '../context/ContextStore';
 import Buscador from '../components/Buscador';
 import Productos from '../components/Productos';
@@ -10,7 +11,7 @@ const Home = () => {
    const [productosFiltrados, setProductosFiltrados] = useState();
 
    const filterProductos = (search) => {
-      // console.log(search);
+      console.log(search);
       const filtrados = productos.filter((prod) =>
          prod.title.toLowerCase().includes(search.toLowerCase())
       );
@@ -25,8 +26,8 @@ const Home = () => {
    }
 
    window.onscroll = () => {
-      const botonScroll = document.getElementById('btnAceptar');
-      console.log(botonScroll);
+      const botonScroll = document.getElementById('btnArriba');
+      // console.log(botonScroll);
       if (
          document.body.scrollTop > 20 ||
          document.documentElement.scrollTop > 20
@@ -54,24 +55,26 @@ const Home = () => {
             }}
          >
             <Buscador
-               style={{ paddingLeft: 'auto', marginTop: '100px' }}
+               style={{ paddingLeft: 'auto', marginTop: '200px' }}
                onSearch={filterProductos}
             />
-            <Carrusel />
-            <div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
                <h2
                   className="text-center"
                   style={{
                      color: 'rgb(185, 5, 5)',
                      fontWeight: 'bold',
                      fontSize: '53px',
-                     paddingTop: '70px',
-                     marginTop: '80px',
+                     paddingTop: '5px',
+                     position: 'absolute',
+                     fontFamily: 'fantasy',
                   }}
                >
                   ProductStore
                </h2>
-               <Carrusel />
+               <div>
+                  <Carrusel style={{ top: '20px' }} />
+               </div>
                <div style={{ position: 'absolute', zIndex: -1 }}>
                   <Productos
                      productos={

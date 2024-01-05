@@ -21,12 +21,22 @@ const NavBar = () => {
             <NavLink to="/" className={setActive}>
                PS
             </NavLink>
-            <NavLink style={{ marginLeft: '30px', marginRight: '10px' }}>
+            <NavLink
+               to="/categoria/men's clothing"
+               style={{ marginLeft: '30px', marginRight: '10px' }}
+            >
                Men
             </NavLink>
-            <NavLink style={{ marginRight: '10px' }}>Jewelly</NavLink>
-            <NavLink style={{ marginRight: '10px' }}>Electronic</NavLink>
-            <NavLink>Woman</NavLink>
+            <NavLink to="/categoria/jewelery" style={{ marginRight: '10px' }}>
+               Jewelly
+            </NavLink>
+            <NavLink
+               to="/categoria/electronics"
+               style={{ marginRight: '10px' }}
+            >
+               Electronic
+            </NavLink>
+            <NavLink to="/categoria/women's clothing">Woman</NavLink>
          </div>
          <div
             style={{

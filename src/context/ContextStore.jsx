@@ -11,6 +11,7 @@ export const ProviderStore = ({ children }) => {
    const [cantidadProducto, setCantidadProducto] = useState(0);
    const [usuario, setUsuario] = useState('');
    const [contrasenya, setContrasenya] = useState('');
+   const [listaCategoria, setListaCategoria] = useState([]);
 
    const obtenerProductos = useCallback(async () => {
       try {
@@ -65,6 +66,14 @@ export const ProviderStore = ({ children }) => {
       setMontoTotal(montoTotal + producto.price);
    };
 
+   const buscarCategoria = (categoria) => {
+      console.log(categoria);
+      console.log(productos);
+      const lista = productos.filter((item) => item.category == categoria);
+      console.log(lista);
+      setListaCategoria(lista);
+   };
+
    const cargarListado = () => {
       console.log(listaProductos);
    };
@@ -89,6 +98,8 @@ export const ProviderStore = ({ children }) => {
             setUsuario,
             contrasenya,
             setContrasenya,
+            buscarCategoria,
+            listaCategoria,
          }}
       >
          {children}

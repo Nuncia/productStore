@@ -1,24 +1,28 @@
 import { useContext, useState } from 'react';
 import { ContextStore } from '../context/ContextStore';
+import { useNavigate } from 'react-router-dom';
 
 const Formulario = () => {
-   const { setUsuario, usuario } = useContext(ContextStore);
+   const { setUsuario } = useContext(ContextStore);
    const [nombre, setNombre] = useState('');
    const [email, setEmail] = useState('');
    const [contrasenya, setContrasenya] = useState('');
    const [mensaje, setMensaje] = useState('');
+   const navigate = useNavigate();
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      let formaValida = true;
+      // let formaValida = true;
       if (!nombre.trim() || email === '' || contrasenya === '') {
          setMensaje('Todos los campos son obligatorios');
       } else {
+         const nombreUsuario = nombre.charAt(0).toUpperCase() + nombre.slice(1);
          setNombre('');
          setEmail('');
          setContrasenya('');
-         setUsuario(nombre);
+         setUsuario(nombreUsuario);
          setMensaje('Usuario creado');
+         navigate(`/`);
       }
    };
    return (
