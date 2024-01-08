@@ -6,19 +6,17 @@ import Productos from '../components/Productos';
 const Categoria = () => {
    const { buscarCategoria, listaCategoria, obtenerProductos } =
       useContext(ContextStore);
-   const { id } = useParams();
+   const { categoria } = useParams();
 
    useEffect(() => {
       obtenerProductos();
-      buscarCategoria(id);
-      console.log(id);
-      console.log('Lista precargada: ', listaCategoria);
-      if (listaCategoria > 0) {
-         return;
+      buscarCategoria(categoria);
+      if (listaCategoria === 0) {
+         alert('Error al cargar');
       } else {
-         alert(listaCategoria.length);
+         return;
       }
-   }, [id]);
+   }, [categoria]);
 
    return (
       <div>

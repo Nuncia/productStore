@@ -10,11 +10,19 @@ const Productos = ({ productos }) => {
    const navigate = useNavigate();
 
    const mostrarProducto = (id) => {
-      navigate(`producto/${id}`);
+      // console.log(id);
+      // if (typeof id === 'string') {
+      //    console.log('es string');
+      // } else {
+      //    console.log('no es string');
+      // }
+      navigate(`/producto/${id}`);
    };
 
-   useEffect(() => {}, []);
-
+   // useEffect(() => {
+   //    console.log(productos);
+   //    productos > 0 ? setcargando(false) : setcargando(true);
+   // }, []);
    return (
       <div
       // style={{ marginTop: '300px' }}

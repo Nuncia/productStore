@@ -25,18 +25,17 @@ const Home = () => {
       });
    }
 
-   window.onscroll = () => {
-      const botonScroll = document.getElementById('btnArriba');
-      // console.log(botonScroll);
-      if (
-         document.body.scrollTop > 20 ||
-         document.documentElement.scrollTop > 20
-      ) {
-         botonScroll.style.opacity = 1;
-      } else {
-         botonScroll.style.opacity = 0;
-      }
-   };
+   // window.onscroll = () => {
+   //    const botonScroll = document.querySelector('#btnArriba');
+   //    if (
+   //       document.body.scrollTop > 20 ||
+   //       document.documentElement.scrollTop > 20
+   //    ) {
+   //       botonScroll.style.opacity = 1;
+   //    } else {
+   //       botonScroll.style.opacity = 1;
+   //    }
+   // };
 
    useEffect(() => {
       obtenerProductos();

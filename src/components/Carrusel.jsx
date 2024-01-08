@@ -27,7 +27,7 @@ function Carrusel() {
             <div></div>
          ) : (
             <div style={{ top: '175px' }}>
-               <Carousel data-bs-theme="dark" interval={2000} showArros={true}>
+               <Carousel data-bs-theme="dark" interval={2000}>
                   {productos.map((producto) => (
                      <Carousel.Item interval={1000} key={producto.id}>
                         <img

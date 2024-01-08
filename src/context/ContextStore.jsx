@@ -6,17 +6,24 @@ export const ContextStore = createContext();
 export const ProviderStore = ({ children }) => {
    const [productos, setproductos] = useState([]);
    const [producto, setproducto] = useState({});
-   const [listaProductos, setListaProductos] = useState([]);
+   // const [listaProductos, setListaProductos] = useState([]);
+   const [lista, setLista] = useState([]);
    const [montoTotal, setMontoTotal] = useState(0);
    const [cantidadProducto, setCantidadProducto] = useState(0);
    const [usuario, setUsuario] = useState('');
    const [contrasenya, setContrasenya] = useState('');
    const [listaCategoria, setListaCategoria] = useState([]);
+   let listaProductos = [];
 
    const obtenerProductos = useCallback(async () => {
       try {
          const url = 'https://fakestoreapi.com/products';
-         const respuesta = await fetch(url);
+         const respuesta = await fetch(url, {
+            mode: 'cors',
+            headers: {
+               'Access-Control-Allow-Origin': '*',
+            },
+         });
          const datos = await respuesta.json();
          const Product = datos.map((item) => ({
             ...item,
@@ -24,8 +31,9 @@ export const ProviderStore = ({ children }) => {
             likes: 0,
          }));
          setproductos(Product);
+         // console.log(productos);
       } catch (e) {
-         console.log(e.message);
+         console.log('obtenerProducto: ', e.message);
       }
    });
 
@@ -43,41 +51,60 @@ export const ProviderStore = ({ children }) => {
       );
    };
    // Busca si existe el producto en la lista de productos
+   // const agregarProducto = (producto) => {
+   //    event.preventDefault();
+
+   //    // console.log(producto);
+   //    const productoExiste = lista.find((item) => item.id === producto.id);
+   //    console.log(productoExiste);
+   //    if (productoExiste) {
+   //       //actualiza cantidad de producto existente
+   //       const productoActualizados = lista.map((item) =>
+   //          item.id === productoExiste.id
+   //             ? { ...item, cantidad: item.cantidad + 1 }
+   //             : item
+   //       );
+   //       // console.log(productoActualizados);
+   //       setLista(productoActualizados);
+   //    } else {
+   //       //agrega producto nuevo a la lista
+   //       console.log('lista: ', lista);
+   //       setLista([...lista, { ...producto, cantidad: 1 }]);
+   //    }
+   //    //Actualiza cantidad total y monto
+   //    // console.log(lista);
+   //    setCantidadProducto(cantidadProducto + 1);
+   //    setMontoTotal(montoTotal + producto.price);
+   // };
+
    const agregarProducto = (producto) => {
-      event.preventDefault();
-      const productoExiste = listaProductos.find(
-         (item) => item.id === producto.id
-      );
-      if (productoExiste) {
-         //actualiza cantidad de producto existente
-         const productoActualizados = listaProductos.map((item) =>
-            item.id === producto.id
-               ? { ...item, cantidad: item.cantidad + 1 }
-               : item
-         );
-         setListaProductos(productoActualizados);
+      const existente = lista.find((prod) => prod.id === producto.id);
+      console.log(existente);
+
+      if (!existente) {
+         listaProductos.push({ ...producto, cantidad: 1 });
       } else {
-         //agrega producto nuevo a la lista
-         setListaProductos([...listaProductos, { ...producto, cantidad: 1 }]);
+         listaProductos = [
+            ...listaProductos,
+            { ...producto, cantidad: producto.cantidad + 1 },
+         ];
       }
-      //Actualiza cantidad total y monto
-      console.log(listaProductos);
+
+      setLista(listaProductos);
       setCantidadProducto(cantidadProducto + 1);
       setMontoTotal(montoTotal + producto.price);
    };
 
    const buscarCategoria = (categoria) => {
       setListaCategoria([]);
-      console.log(categoria);
-      // console.log(productos);
       const lista = productos.filter((item) => item.category == categoria);
-      console.log(lista);
       setListaCategoria(lista);
    };
 
    const cargarListado = () => {
-      setListaProductos(producto);
-      console.log(listaProductos);
+      console.log(lista);
+      setLista(productos);
+      console.log('cargarListado: ', lista);
    };
 
    return (
